@@ -9,49 +9,37 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- <link rel="stylesheet" href="bootstrap.css"> -->
 
-    <title>Regisztráció</title>
+    <title>Elfelejtett jelszó</title>
   </head>
   <body>
     <div class="container">
       <div class="row">
         <div class="col text-center">
-          <h1>Regisztráció</h1>
+          <h1>Jelszó változtatás</h1>
         </div>
       </div>
-
       <div class="row">
         <div class="col">
             <form>
-                <div class="text-center">
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-primary active">
-                            <input type="radio" id="optionStudent" checked> Diák
-                        </label>
-                        <label class="btn btn-primary">
-                            <input type="radio" id="optionTeacher"> Tanár
-                        </label>
-                    </div>
-                </div>
                 <div class="form-group">
                   <label for="inputNeptun">Neptun kód</label>
                   <input type="text" class="form-control" id="inputNeptun" placeholder="Neptun kód">
                 </div>
                 <div class="form-group">
-                    <label for="inputName">Teljes név</label>
-                    <input type="text" class="form-control" id="inputName" placeholder="Teljes név">
+                  <label for="inputPassword">Új jelszó</label>
+                  <input type="password" class="form-control" id="inputPassword" placeholder="Új jelszó">
                 </div>
                 <div class="form-group">
-                  <label for="inputPassword">Jelszó</label>
-                  <input type="password" class="form-control" id="inputPassword" placeholder="Jelszó">
-                </div>
-                <div class="form-group">
-                    <label for="inputRepeatPassword">Jelszó mégegyszer</label>
-                    <input type="password" class="form-control" id="inputRepeatPassword" placeholder="Jelszó mégegyszer">
+                    <label for="inputRepeatPassword">Új jelszó mégegyszer</label>
+                    <input type="password" class="form-control" id="inputRepeatPassword" placeholder="Új jelszó mégegyszer">
                 </div>
                 <div class="row text-center">
-                  <div class="col">
-                    <button type="submit" class="btn btn-primary">Regisztráció</button>
-                  </div>                
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-primary">Jelszó megváltoztatása</button>
+                    </div> 
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-secondary">Mégsem</button>
+                    </div>                
                 </div>
               </form>
         </div>
