@@ -1,0 +1,33 @@
+Tanár
+    editsubject.html
+    editsubjects.html
+    teacher.html
+    students.html
+
+Diák
+    student.html
+    takedropsubjects.html
+
+Login / reg
+    index.html
+    forgot.html
+    register.html
+
+
+/                                   | GET          - login
+/login                              | POST         - login
+/register                           | GET + POST   - regisztráció
+/forgot                             | GET + POST   - elfelejtett jelszó
+/logout                             | GET          - kilépés
+                                    |
+/teacher/:teacherId                 | GET          - tanított tárgy lista
+                                    |
+/student/:studentId                 | GET          - naptár, felvett tárgy lista
+/student/:studentId/edit            | GET          - tárgy felvétel/leadás
+/student/:studentId/drop/:subjectId | GET          - tárgy leadás
+/student/:studentId/take/:subjectId | GET          - tárgy felvétel
+                                    |
+/subjects                           | GET          - összes tárgy lista
+/subject/:subjectId/edit            | GET + POST   - tárgy módosítás / létrehozás
+/subject/:subjectId/delete          | GET          - tárgy törlése
+/subject/:subjectId/students        | GET          - tárgyat felvett hallgatók
