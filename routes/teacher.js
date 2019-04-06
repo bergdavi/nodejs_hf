@@ -9,6 +9,6 @@ module.exports = function (app) {
     app.get('/teacher/:teacherId',      
         authTeacherMW(objectRepository),
         getSubjectsMW(objectRepository),
-        renderMW(objectRepository, 'student') // teacher.html
+        renderMW(objectRepository, 'teacher') // teacher.html
     );
 };

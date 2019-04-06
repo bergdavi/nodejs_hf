@@ -1,0 +1,62 @@
+<% include header %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col text-center">
+          <h1>Tantárgy szerkesztése</h1>
+        </div>
+      </div>      
+      <div class="row">
+        <div class="col">
+            <form method="post" action="<%= typeof(subject) ==="undefined"?"":("/subject/" + subject.id + "/edit" )%>">
+                <div class="form-group">
+                  <label for="inputSubjectName">Tárgy neve</label>
+                  <input type="text" class="form-control col" id="inputSubjectName" placeholder="Tárgy neve" value="<%= typeof(subject) ==="undefined"?"": subject.name %>">
+                </div>
+                <div class="form-group">
+                    <label for="selectTeacher">Tanár</label>
+                    <select class="form-control" id="selectTeacher">                      
+                      <% teachers.forEach(function(teacher){ %>
+                        <option <%= (typeof(subject) != "undefined" && subject.teacher === teacher)?"selected":"" %>><%= teacher %></option>
+                      <% }); %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="inputSubjectName">Időpont</label>
+                    <div class="form-row">
+                        <div class="col-4">
+                            <select class="form-control" id="selectDay">
+                                <option <%= (typeof(subject) != "undefined" && subject.day === 1)?"selected":"" %>>Hétfő</option>
+                                <option <%= (typeof(subject) != "undefined" && subject.day === 2)?"selected":"" %>>Kedd</option>
+                                <option <%= (typeof(subject) != "undefined" && subject.day === 3)?"selected":"" %>>Szerda</option>
+                                <option <%= (typeof(subject) != "undefined" && subject.day === 4)?"selected":"" %>>Csütörtök</option>
+                                <option <%= (typeof(subject) != "undefined" && subject.day === 5)?"selected":"" %>>Péntek</option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <input type="text" class="form-control" id="inputBeginTime" placeholder="Kezdési időpont" value="<%=typeof(subject) === "undefined"?"": subject.start %>">
+                        </div>
+                        <div class="col-4">
+                            <input type="text" class="form-control col" id="inputEndTime" placeholder="Vége időpont" value="<%= typeof(subject) === "undefined"?"":subject.end %>">
+                        </div>
+                    </div>
+                </div>
+                <div class="row text-center">
+                  <div class="col-<%=typeof(subject) === "undefined"?6:4%>">
+                      <button type="submit" class="btn btn-success">Mentés</a>
+                    </div>
+                  <div class="col-<%=typeof(subject) === "undefined"?6:4%>">
+                      <a class="btn btn-secondary" href="/subjects">Vissza</a>
+                  </div>   
+                  <%if(typeof(subject) != "undefined") {%>               
+                  <div class="col-4">
+                      <a class="btn btn-danger" href="/subject/<%= subject.id %>/delete">Tárgy törlése</a>
+                  </div>    
+                  <%};%>              
+                </div>
+              </form>
+        </div>
+      </div>         
+    </div>
+    
+<% include footer %>

@@ -28,6 +28,7 @@ Login / reg
 /student/:studentId/take/:subjectId | GET          - tárgy felvétel
                                     |
 /subjects                           | GET          - összes tárgy lista
+/subjects/new                       | GET + POST   - tárgy létrehozás
 /subject/:subjectId/edit            | GET + POST   - tárgy módosítás / létrehozás
 /subject/:subjectId/delete          | GET          - tárgy törlése
 /subject/:subjectId/students        | GET          - tárgyat felvett hallgatók

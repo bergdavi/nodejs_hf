@@ -5,6 +5,14 @@
  */
 module.exports = function (objectrepository) {
     return function (req, res, next) {
-        return next();
+        console.log("checkUserLoginMw");
+
+        let student = true
+        if(student) {
+            res.redirect("/student/0");
+        }
+        else {
+            res.redirect("/teacher/0");
+        }        
     };
 };

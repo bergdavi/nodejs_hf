@@ -3,6 +3,7 @@
 */
 module.exports = function (objectrepository) {
     return function (req, res, next) {
-        return next();
+        console.log("deleteSubjectMW");
+        res.redirect("/subjects");
     };
 };

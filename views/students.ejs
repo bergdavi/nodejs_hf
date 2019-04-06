@@ -1,0 +1,34 @@
+<% include header %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col text-center">
+          <h1><%= subject.name %> tárgyat felvett hallgatók</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Hallgatók</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% subject.students.forEach(function(student){ %>
+                    <tr>
+                      <td><%= student %></td>
+                    </tr>
+                  <% }); %>
+                </tbody>
+            </table>
+        </div>
+      </div>   
+      <div class="row text-center">
+        <div class="col">
+            <a class="btn btn-secondary" href="/teacher/<%= user.id %>">Vissza</a>
+        </div> 
+      </div>         
+    </div>
+    
+<% include footer %>

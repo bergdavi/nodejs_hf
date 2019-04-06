@@ -3,6 +3,7 @@
  */
 module.exports = function (objectrepository) {
     return function (req, res, next) {
-        return next();
+        console.log("dropSubjectMW");
+        res.redirect("/student/" + res.locals.user.id + "/edit");
     };
 };

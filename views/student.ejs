@@ -1,26 +1,12 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<% include header %>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="bootstrap.css"> -->
-
-   
-
-    <title>Órarend</title>
-  </head>
-  <body>
     <div class="container">
       <div class="row">
         <div class="col-10 text-center">
           <h1>Teszt Elek</h1>
         </div>
         <div class="col-2">
-                <a type="submit" class="btn btn-danger" href="/index.html">Kilépés</a>
+                <a class="btn btn-danger" href="/logout">Kilépés</a>
             </div>
       </div>
       <div class="row">
@@ -35,22 +21,18 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Adatbázisok</td>
-                  </tr>
-                  <tr>
-                    <td>Szoftvertechnikák</td>
-                  </tr>
-                  <tr>
-                    <td>Analízis</td>
-                  </tr>
+                  <% user.subjects.forEach(function(subject){ %>
+                    <tr>
+                      <td><%= subject.name %></td>
+                    </tr>
+                  <% }); %>
                 </tbody>
             </table>
         </div>
       </div>   
       <div class="row text-center">
         <div class="col">
-            <a type="submit" class="btn btn-primary" href="/takedropsubjects.html">Tantárgyak felvétele/leadása</a>
+            <a class="btn btn-primary" href="/student/<%= user.id %>/edit">Tantárgyak felvétele/leadása</a>
         </div> 
       </div>        
     </div>
@@ -62,11 +44,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-     <link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
-    <script src='lib/jquery.min.js'></script>
-    <script src='lib/jquery-ui.min.js'></script>
-    <script src='lib/moment.min.js'></script>
-    <script src='fullcalendar/fullcalendar.min.js'></script>   
+    <link rel='stylesheet' href='/fullcalendar/fullcalendar.css' />
+    <script src='/lib/moment.min.js'></script>
+    <script src='/fullcalendar/fullcalendar.min.js'></script>   
 
 
     <script>
@@ -76,32 +56,22 @@
             $('#calendar').fullCalendar({
                 themeSystem: 'bootstrap4',
                 weekends: false,
-                minTime: "08:00:00",
-                maxTime: "18:00:00",
+                minTime: '08:00:00',
+                maxTime: '18:00:00',
                 defaultView: 'agendaWeek',
                 header: false,
                 allDaySlot: false,
                 columnHeaderFormat: 'dddd',
                 height: 'auto',
                 events: [
-                {
-                    title  : 'Adatbázisok',
-                    dow: [1],
-                    start: '8:00',
-                    end: '10:00'
-                },
-                {
-                    title  : 'Szoftvertechnikák',
-                    dow: [2],
-                    start: '12:00',
-                    end: '14:00'
-                },
-                {
-                    title  : 'Analízis',
-                    dow: [4],
-                    start: '9:30',
-                    end: '11:30'
-                }
+                <% user.subjects.forEach(function(subject){ %>
+                  {
+                      title  : '<%= subject.name %>',
+                      dow: [<%= subject.day %>],
+                      start: '<%= subject.start %>',
+                      end: '<%= subject.end %>'
+                  },
+                <% }); %>
             ]
             })
 

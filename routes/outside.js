@@ -33,6 +33,6 @@ module.exports = function (app) {
     );
 
     app.get('/',      
-        renderMW(objectRepository, 'login') // index.html
+        renderMW(objectRepository, 'index') // index.html
     ); 
 };

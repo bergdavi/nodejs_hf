@@ -4,6 +4,11 @@
  */
 module.exports = function (objectrepository) {
     return function (req, res, next) {
+        console.log("authStudentMW");
+
+        res.locals.user = {};
+        res.locals.user.id = 0;
+
         return next();
     };
 };

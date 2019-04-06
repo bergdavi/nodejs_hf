@@ -1,0 +1,36 @@
+<% include header %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col text-center">
+          <h1>Órarend</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+            <form method="post" action="/login">
+                <div class="form-group">
+                  <label for="inputNeptun">Neptun kód</label>
+                  <input type="text" class="form-control" id="inputNeptun" placeholder="Neptun kód">
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword">Jelszó</label>
+                  <input type="password" class="form-control" id="inputPassword" placeholder="Jelszó">
+                </div>
+                <div class="row text-center">
+                  <div class="col-4">
+                    <button type="submit" class="btn btn-primary">Bejelentkezés</a>
+                  </div>
+                  <div class="col-4">
+                      <a class="btn btn-secondary" href="/register">Regisztráció</a>
+                  </div>                  
+                  <div class="col-4">
+                      <a class="btn btn-danger" href="/forgot">Elfelejtett jelszó</a>
+                  </div>                  
+                </div>
+              </form>
+        </div>
+      </div>        
+    </div>
+    
+<% include footer %>

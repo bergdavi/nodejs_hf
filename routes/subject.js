@@ -14,7 +14,18 @@ module.exports = function (app) {
     app.get('/subjects',
         authTeacherMW(objectRepository),
         getSubjectsMW(objectRepository),
-        renderMW(objectRepository, 'subjects') // editsubjects.html
+        renderMW(objectRepository, 'editsubjects') // editsubjects.html
+    );
+
+    app.get('/subjects/new',
+        authTeacherMW(objectRepository),
+        getTeachersMW(objectRepository),
+        renderMW(objectRepository, 'editsubject') // editsubject.html
+    );
+
+    app.post('/subjects/new',
+        authTeacherMW(objectRepository),
+        editSubjectMW(objectRepository)        
     );
 
     app.get('/subject/:subjectId/edit',

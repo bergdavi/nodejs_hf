@@ -1,0 +1,42 @@
+<% include header %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col text-center">
+          <h1>Tantárgyak felvétele/leadása</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Tanított tantárgyak</th>
+                    <th scope="col">Időpont</th>
+                    <th scope="col">Tanár</th>
+                    <th scope="col" style="width: 1px"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% subjects.forEach(function(subject){ %>
+                    <tr>
+                      <td><%= subject.name %></td>
+                      <td><%= subject.day %> <%= subject.start %>-<%= subject.end %></td>
+                      <td><%= subject.teacher %></td>
+                      <td>
+                          <a href="/student/<%= user.id %>/<%= subject.taking?"drop":"take" %>/<%= subject.id %>" class="btn <%= subject.own?"btn-danger":"btn-success" %>"><%= subject.own?"Leadás":"Felvétel" %></button>
+                      </td>
+                    </tr>
+                  <% }); %>
+                </tbody>
+            </table>
+        </div>
+      </div>   
+      <div class="row text-center">
+        <div class="col">
+            <a class="btn btn-secondary" href="/student/<%= user.id %>">Vissza</a>
+        </div> 
+      </div>         
+    </div>
+    
+<% include footer %>
