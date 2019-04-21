@@ -9,6 +9,8 @@ var renderMW = require('../middlewares/generic/render');
 
 module.exports = function (app) {
     var objectRepository = {
+        userModel: userModel,
+        subjectModel: subjectModel
     };   
 
     app.get('/subjects',

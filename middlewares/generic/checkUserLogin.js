@@ -3,16 +3,41 @@
  * Ha a felhasználó tanár átirányítás: /teacher
  * Ha a felhasználó diák átirányítás: /student
  */
-module.exports = function (objectrepository) {
-    return function (req, res, next) {
-        console.log("checkUserLoginMw");
+var requireOption = require('../common').requireOption;
 
-        let student = true
-        if(student) {
-            res.redirect("/student/0");
+module.exports = function (objectrepository) {
+
+    var userModel = requireOption(objectrepository, 'userModel');
+
+    return function (req, res, next) {
+
+        if ((typeof req.body === 'undefined')||
+            (typeof req.body.neptun === 'undefined') ||
+            (typeof req.body.password === 'undefined')) {
+            return next();
         }
-        else {
-            res.redirect("/teacher/0");
-        }        
+
+        let neptun = req.body.neptun.toUpperCase();
+
+        userModel.findOne({neptun: neptun}, (err, result) => {
+            if(err || !result) {
+                return next();
+            }
+
+            if(result.password !== req.body.password) {
+                return next();
+            }
+
+            req.session.userid = result._id;
+
+            if(result.type === "student") {
+                res.redirect("/student/" + req.session.userid);
+            }
+            else {
+                res.redirect("/teacher/" + req.session.userid);
+            }
+        });
+
+                
     };
 };

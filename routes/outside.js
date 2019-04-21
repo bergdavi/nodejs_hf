@@ -4,8 +4,11 @@ var checkUserLoginMW = require('../middlewares/generic/checkUserLogin');
 var resetPassMW = require('../middlewares/generic/resetPass');
 var renderMW = require('../middlewares/generic/render');
 
+var userModel = require('../models/user');
+
 module.exports = function (app) {
     var objectRepository = {
+        userModel: userModel
     };
 
     app.get('/register',
