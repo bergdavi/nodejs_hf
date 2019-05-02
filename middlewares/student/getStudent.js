@@ -1,5 +1,5 @@
 /**
- * Az adatbázisból kiolvassa az összes hallagtó nevét
+ * Az adatbázisból kiolvassa egy diák adatait
 */
 var requireOption = require('../common').requireOption;
 
@@ -8,12 +8,11 @@ module.exports = function (objectrepository) {
     var userModel = requireOption(objectrepository, 'userModel');
 
     return function (req, res, next) {
-        userModel.find({type: "student"}, (err, results) => {
-            if(err || !results) {
+        userModel.findOne({_id: req.param('studentId')}, (err, result) => {
+            if(err || !result) {
                 return next();
             }
-            res.locals.students = results;
-            
+            res.locals.user = result;         
             return next();
         });
     };

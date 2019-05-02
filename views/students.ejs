@@ -15,11 +15,11 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% subject.students.forEach(function(student){ %>
+                  <% students.forEach(function(student){ if(subject.students.indexOf(student._id) >= 0){ %>
                     <tr>
-                      <td><%= student %></td>
+                      <td><%= student.name %></td>
                     </tr>
-                  <% }); %>
+                  <% }}); %>
                 </tbody>
             </table>
         </div>

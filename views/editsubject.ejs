@@ -11,21 +11,21 @@
             <form method="post" action="<%= typeof(subject) ==="undefined"?"":("/subject/" + subject.id + "/edit" )%>">
                 <div class="form-group">
                   <label for="inputSubjectName">Tárgy neve</label>
-                  <input type="text" class="form-control col" id="inputSubjectName" placeholder="Tárgy neve" value="<%= typeof(subject) ==="undefined"?"": subject.name %>">
+                  <input type="text" class="form-control col" name="name" id="inputSubjectName" placeholder="Tárgy neve" value="<%= typeof(subject) ==="undefined"?"": subject.name %>">
                 </div>
                 <div class="form-group">
                     <label for="selectTeacher">Tanár</label>
-                    <select class="form-control" id="selectTeacher">                      
+                    <select class="form-control" name="teacher" id="selectTeacher">                      
                       <% teachers.forEach(function(teacher){ %>
-                        <option <%= (typeof(subject) != "undefined" && subject.teacher === teacher)?"selected":"" %>><%= teacher %></option>
+                        <option <%= (typeof(subject) != "undefined" && subject.teacher._id.toString() === teacher._id.toString())?"selected":"" %>><%=teacher.name %></option>
                       <% }); %>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="inputSubjectName">Időpont</label>
+                    <label for="selectDay">Időpont</label>
                     <div class="form-row">
                         <div class="col-4">
-                            <select class="form-control" id="selectDay">
+                            <select class="form-control" name="day" id="selectDay">
                                 <option <%= (typeof(subject) != "undefined" && subject.day === 1)?"selected":"" %>>Hétfő</option>
                                 <option <%= (typeof(subject) != "undefined" && subject.day === 2)?"selected":"" %>>Kedd</option>
                                 <option <%= (typeof(subject) != "undefined" && subject.day === 3)?"selected":"" %>>Szerda</option>
@@ -34,10 +34,10 @@
                             </select>
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="inputBeginTime" placeholder="Kezdési időpont" value="<%=typeof(subject) === "undefined"?"": subject.start %>">
+                            <input type="text" class="form-control" id="inputBeginTime" name="start" placeholder="Kezdési időpont" value="<%=typeof(subject) === "undefined"?"": subject.start %>">
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control col" id="inputEndTime" placeholder="Vége időpont" value="<%= typeof(subject) === "undefined"?"":subject.end %>">
+                            <input type="text" class="form-control col" id="inputEndTime" name="end" placeholder="Vége időpont" value="<%= typeof(subject) === "undefined"?"":subject.end %>">
                         </div>
                     </div>
                 </div>

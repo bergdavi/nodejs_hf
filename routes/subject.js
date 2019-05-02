@@ -42,16 +42,19 @@ module.exports = function (app) {
 
     app.post('/subject/:subjectId/edit',
         authTeacherMW(objectRepository),
+        getSubjectMW(objectRepository),
         editSubjectMW(objectRepository)        
     );
 
     app.get('/subject/:subjectId/delete',
         authTeacherMW(objectRepository),
+        getSubjectMW(objectRepository),
         deleteSubjectMW(objectRepository)        
     );
 
     app.get('/subject/:subjectId/students',
         authTeacherMW(objectRepository),
+        getSubjectMW(objectRepository),
         getStudentsMW(objectRepository),
         renderMW(objectRepository, 'students') // students.html
     );

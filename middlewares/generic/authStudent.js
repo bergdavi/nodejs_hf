@@ -4,16 +4,16 @@
  */
 module.exports = function (objectrepository) {
     return function (req, res, next) {
-        if(typeof req.session.userid === 'undefined') {
-            return res.redirect('/');
-        }
+        // if(typeof req.session.userid === 'undefined') {
+        //     return res.redirect('/');
+        // }
 
-        if(req.session.userid !== req.param('studentId')) {
-            return res.redirect('/');
-        }
+        // if(req.session.userid !== req.param('studentId')) {
+        //     return res.redirect('/');
+        // }
 
         res.locals.user = {};
-        res.locals.user.id = 0;
+        res.locals.user.id = req.session.userid;
 
         return next();
     };

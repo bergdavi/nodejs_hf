@@ -6,9 +6,7 @@ var requireOption = require('../common').requireOption;
 module.exports = function (objectrepository) {
     var userModel = requireOption(objectrepository, 'userModel');
 
-    return function (req, res, next) {
-        console.log("registerMW");
-        
+    return function (req, res, next) {        
         if ((typeof req.body === 'undefined') ||
             (typeof req.body.neptun === 'undefined') || 
             (typeof req.body.password === 'undefined') ||

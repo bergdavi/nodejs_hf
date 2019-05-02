@@ -3,7 +3,7 @@
  */
 module.exports = function (objectrepository) {
     return function (req, res, next) {
-        console.log("logoutMW");
+        req.session.userid = 0;
         res.redirect("/");
     };
 };

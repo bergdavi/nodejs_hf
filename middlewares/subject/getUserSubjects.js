@@ -1,19 +1,18 @@
 /**
- * Az adatbázisból kiolvassa az összes hallagtó nevét
+ * Az adatbázisból kiolvassa a felhasználó tárgyait
 */
 var requireOption = require('../common').requireOption;
 
 module.exports = function (objectrepository) {
 
-    var userModel = requireOption(objectrepository, 'userModel');
+    var subjectModel = requireOption(objectrepository, 'subjectModel');
 
     return function (req, res, next) {
-        userModel.find({type: "student"}, (err, results) => {
+        subjectModel.find({_id: {$in: res.locals.user.subjects}}, (err, results) => {
             if(err || !results) {
                 return next();
             }
-            res.locals.students = results;
-            
+            res.locals.user.subjects = results;
             return next();
         });
     };

@@ -1,5 +1,7 @@
 var authTeacherMW = require('../middlewares/generic/authTeacher');
 var getSubjectsMW = require('../middlewares/subject/getSubjects');
+var getUserSubjectsMW = require('../middlewares/subject/getUserSubjects');
+var getTeacherMW = require('../middlewares/teacher/getTeacher');
 var renderMW = require('../middlewares/generic/render');
 
 var userModel = require('../models/user');
@@ -13,7 +15,8 @@ module.exports = function (app) {
 
     app.get('/teacher/:teacherId',      
         authTeacherMW(objectRepository),
-        getSubjectsMW(objectRepository),
+        getTeacherMW(objectRepository),
+        getUserSubjectsMW(objectRepository),        
         renderMW(objectRepository, 'teacher') // teacher.html
     );
 };

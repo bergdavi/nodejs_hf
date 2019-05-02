@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-10 text-center">
-          <h1>Minta Aladár</h1>
+          <h1><%= user.name %></h1>
         </div>
         <div class="col-2">
             <a class="btn btn-danger" href="/logout">Kilépés</a>
@@ -23,7 +23,7 @@
                     <tr>
                       <td><%= subject.name %></td>
                       <td>
-                          <a class="btn btn-primary" href="/subject/<%= subject.id %>/students">Hallgatók</a>
+                          <a class="btn btn-primary" href="/subject/<%= subject._id %>/students">Hallgatók</a>
                       </td>
                     </tr>
                     <% }); %>
