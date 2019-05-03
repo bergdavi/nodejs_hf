@@ -14,6 +14,7 @@ module.exports = function (objectrepository) {
         if ((typeof req.body === 'undefined')||
             (typeof req.body.neptun === 'undefined') ||
             (typeof req.body.password === 'undefined')) {
+            res.locals.error = "Mindent ki kell tölteni!";
             return next();
         }
 
@@ -21,10 +22,12 @@ module.exports = function (objectrepository) {
 
         userModel.findOne({neptun: neptun}, (err, result) => {
             if(err || !result) {
+                res.locals.error = "Nem sikerült belépni!";
                 return next();
             }
 
             if(result.password !== req.body.password) {
+                res.locals.error = "Rossz jelszó!";
                 return next();
             }
 

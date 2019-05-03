@@ -16,7 +16,8 @@ module.exports = function (app) {
     );
 
     app.post('/register',
-        registerMW(objectRepository)
+        registerMW(objectRepository),
+        renderMW(objectRepository, 'register') // register.html
     );
 
     app.get('/logout',
@@ -24,7 +25,8 @@ module.exports = function (app) {
     );
 
     app.post('/login',      
-        checkUserLoginMW(objectRepository)
+        checkUserLoginMW(objectRepository),
+        renderMW(objectRepository, 'index')
     );
 
     app.get('/forgot',
@@ -32,7 +34,8 @@ module.exports = function (app) {
     );
 
     app.post('/forgot',
-        resetPassMW(objectRepository)
+        resetPassMW(objectRepository),
+        renderMW(objectRepository, 'forgot') // forgot.html
     );
 
     app.get('/',      

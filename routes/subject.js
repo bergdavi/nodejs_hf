@@ -30,7 +30,9 @@ module.exports = function (app) {
 
     app.post('/subjects/new',
         authTeacherMW(objectRepository),
-        editSubjectMW(objectRepository)        
+        editSubjectMW(objectRepository),
+        getTeachersMW(objectRepository),
+        renderMW(objectRepository, 'editsubject') // editsubject.html
     );
 
     app.get('/subject/:subjectId/edit',
@@ -43,7 +45,9 @@ module.exports = function (app) {
     app.post('/subject/:subjectId/edit',
         authTeacherMW(objectRepository),
         getSubjectMW(objectRepository),
-        editSubjectMW(objectRepository)        
+        editSubjectMW(objectRepository),
+        getTeachersMW(objectRepository),
+        renderMW(objectRepository, 'editsubject') // editsubject.html      
     );
 
     app.get('/subject/:subjectId/delete',

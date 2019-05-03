@@ -9,13 +9,13 @@ module.exports = function (objectrepository) {
     var userModel = requireOption(objectrepository, 'userModel');
 
     return function (req, res, next) {
-        
         if ((typeof req.body === 'undefined') ||
-            (typeof req.body.name === 'undefined') || 
+            (typeof req.body.name === 'undefined' || req.body.name === "") || 
             (typeof req.body.teacher === 'undefined') ||
             (typeof req.body.day === 'undefined')||
-            (typeof req.body.start === 'undefined') ||
-            (typeof req.body.end === 'undefined')) {
+            (typeof req.body.start === 'undefined' || req.body.start === "") ||
+            (typeof req.body.end === 'undefined' || req.body.end === "")) {
+                res.locals.error = "Mindent ki kell tölteni";
                 return next();
         }
 
@@ -25,6 +25,7 @@ module.exports = function (objectrepository) {
             isNaN(parseInt(startTime[1])) || 
             isNaN(parseInt(endTime[0])) || 
             isNaN(parseInt(endTime[1]))) {
+                res.locals.error = "Érvénytelen időpont!";
                 return next();
         }
 
@@ -42,6 +43,7 @@ module.exports = function (objectrepository) {
     
         userModel.findOne({name: req.body.teacher}, (err, result) => {
             if(err || !result) {
+                res.locals.error = "Érvénytelen tanár!";
                 return next();
             }
 
@@ -50,8 +52,22 @@ module.exports = function (objectrepository) {
             subject.teacher = result;
             subject.teacherName = result.name;
             subject.day = days.indexOf(req.body.day)+1;
-            subject.start = parseInt(startTime[0]) + ":" + parseInt(startTime[1]);
-            subject.end = parseInt(endTime[0]) + ":" + parseInt(endTime[1]);
+            if(subject.day < 1 || subject.day > 5) {
+                res.locals.error = "Érvénytelen nap!";
+                return next();
+            }
+            let startFirstDigit = parseInt(startTime[0]).toString();
+            let startLastDigit = parseInt(startTime[1]).toString();
+            let endFirstDigit = parseInt(endTime[0]).toString();
+            let endLastDigit = parseInt(endTime[1]).toString();
+            if(startLastDigit.length === 1) {
+                startLastDigit = "0" + startLastDigit;
+            }
+            if(endLastDigit.length === 1) {
+                endLastDigit = "0" + endLastDigit;
+            }
+            subject.start = startFirstDigit + ":" + startLastDigit;
+            subject.end = endFirstDigit + ":" + endLastDigit;
             result.subjects.push(subject);
             result.save((err, result) => {
                 if(err) {

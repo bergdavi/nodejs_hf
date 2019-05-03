@@ -9,8 +9,9 @@ module.exports = function (objectrepository) {
 
     return function (req, res, next) {
         if ((typeof req.body === 'undefined') ||
-            (typeof req.body.neptun === 'undefined') || 
-            (typeof req.body.password === 'undefined')) {
+            (typeof req.body.neptun === 'undefined' || req.body.neptun === "") || 
+            (typeof req.body.password === 'undefined' || req.body.password === "")) {
+                res.locals.error = "Mindent ki kell tölteni!";
                 return next();
         }
 
@@ -18,6 +19,7 @@ module.exports = function (objectrepository) {
         
         userModel.findOne({neptun: neptun}, (err, result) => {
             if(err || !result) {
+                res.locals.error = "Hibás Neptun!";
                 return next();
             }
             result.password = req.body.password;

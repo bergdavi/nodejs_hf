@@ -8,25 +8,42 @@ module.exports = function (objectrepository) {
 
     return function (req, res, next) {        
         if ((typeof req.body === 'undefined') ||
-            (typeof req.body.neptun === 'undefined') || 
-            (typeof req.body.password === 'undefined') ||
-            (typeof req.body.name === 'undefined')||
+            (typeof req.body.neptun === 'undefined' || req.body.neptun === "") || 
+            (typeof req.body.password === 'undefined' || req.body.password === "") ||
+            (typeof req.body.name === 'undefined' || req.body.name === "")||
             (typeof req.body.type === 'undefined') ||
             (req.body.type !== 'student' && req.body.type !== "teacher")) {
+                res.locals.error = "Mindent ki kell tölteni!";
                 return next();
         }
 
-        var user = new userModel();
-        user.neptun = req.body.neptun.toUpperCase();
-        user.password = req.body.password;
-        user.name = req.body.name;
-        user.type = req.body.type;
+        let neptun = req.body.neptun.toUpperCase();
 
-        user.save((err, result) => {
+        // Ellenőrzi, hogy egyedi legyen a neptun
+        userModel.findOne({neptun: neptun}, (err, result) => {
             if(err) {
-                return next(err);
+                res.locals.error = err;
+                return next();
             }
-            res.redirect("/");
-        });        
+            if(result) {
+                res.locals.error = "Már létezik a Neptun kód";
+                return next();
+            }
+
+            var user = new userModel();
+            user.neptun = req.body.neptun.toUpperCase();
+            user.password = req.body.password;
+            user.name = req.body.name;
+            user.type = req.body.type;
+    
+            user.save((err, result) => {
+                if(err) {
+                    return next(err);
+                }
+                res.redirect("/");
+            });        
+        });
+
+       
     };
 };
